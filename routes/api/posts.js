@@ -82,7 +82,7 @@ router.delete(
           // Delete
           post.remove().then(() => res.json({ success: true }));
         })
-        .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+        .catch(err => res.status(404).json({ postNotFound: 'No post found' }));
     });
   }
 );
@@ -111,7 +111,7 @@ router.post(
 
           post.save().then(post => res.json(post));
         })
-        .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+        .catch(err => res.status(404).json({ postNotFound: 'No post found' }));
     });
   }
 );
@@ -146,7 +146,7 @@ router.post(
           // Save
           post.save().then(post => res.json(post));
         })
-        .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+        .catch(err => res.status(404).json({ postNotFound: 'No post found' }));
     });
   }
 );
@@ -180,7 +180,7 @@ router.post(
         // Save
         post.save().then(post => res.json(post));
       })
-      .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+      .catch(err => res.status(404).json({ postNotFound: 'No post found' }));
   }
 );
 
@@ -201,7 +201,7 @@ router.delete(
         ) {
           return res
             .status(404)
-            .json({ commentnotexists: 'Comment does not exist' });
+            .json({ commentNotExists: 'Comment does not exist' });
         }
 
         // Get remove index
@@ -214,7 +214,7 @@ router.delete(
 
         post.save().then(post => res.json(post));
       })
-      .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
+      .catch(err => res.status(404).json({ postNotFound: 'No post found' }));
   }
 );
 
