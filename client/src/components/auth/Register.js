@@ -26,11 +26,29 @@ class Register extends Component {
     }
   }
 
+  //TODO: fix these
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
   }
+
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.errors) {
+  //     return { errors: nextProps.errors };
+  //   }
+  //   return null
+  // }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.errors !== this.props.errors) {
+  //     this.setState({ errors: this.props.errors })
+  //   }
+  //   if (this.props.auth.isAuthenticated) {
+  //     this.setState({ isAuthenticated: this.props.auth.isAuthenticated })
+  //     this.props.history.push('/dashboard');
+  //   }
+  // }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -91,7 +109,10 @@ class Register extends Component {
                   {errors.email && (
                     <div className="invalid-feedback">{errors.email}</div>
                   )}
-                  <small className="form-text text-muted" />
+                  <small className="form-text text-muted">
+                    This site uses Gravatar so if you want a profile image, use
+                    a Gravatar email
+                  </small>
                 </div>
                 <div className="form-group">
                   <input
