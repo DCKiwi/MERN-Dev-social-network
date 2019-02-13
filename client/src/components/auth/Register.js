@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions';
@@ -14,6 +15,15 @@ class Register extends Component {
       password2: '',
       errors: {}
     };
+
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -22,11 +32,11 @@ class Register extends Component {
     }
   }
 
-  onChange = e => {
+  onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-  };
+  }
 
-  onSubmit = e => {
+  onSubmit(e) {
     e.preventDefault();
 
     const newUser = {
@@ -35,8 +45,9 @@ class Register extends Component {
       password: this.state.password,
       password2: this.state.password2
     };
-    this.props.registerUser(newUser);
-  };
+
+    this.props.registerUser(newUser, this.props.history);
+  }
 
   render() {
     const { errors } = this.state;
@@ -80,10 +91,7 @@ class Register extends Component {
                   {errors.email && (
                     <div className="invalid-feedback">{errors.email}</div>
                   )}
-                  <small className="form-text text-muted">
-                    This site uses Gravatar so if you want a profile image, use
-                    a Gravatar email
-                  </small>
+                  <small className="form-text text-muted" />
                 </div>
                 <div className="form-group">
                   <input
@@ -138,6 +146,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null,
   { registerUser }
-)(Register);
+)(withRouter(Register));
